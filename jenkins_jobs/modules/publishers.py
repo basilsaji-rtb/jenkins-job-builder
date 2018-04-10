@@ -3519,6 +3519,48 @@ def tap(registry, xml_parent, data):
     ]
     helpers.convert_mapping_to_xml(tap, data, mappings, fail_required=True)
 
+def packer(registry, xml_parent, data):
+    """yaml: packer
+    Adds support to packer plugin
+
+    Requires the Jenkins :jenkins-wiki:`Packer plugin
+    <Packer>`.
+
+    :arg dict task: Post build task definition
+    :arg list task[matches]: list of matches when to run the task
+    :arg dict task[matches][*]: match definition
+    :arg str task[matches][*][log-text]: text to match against the log
+    :arg str task[matches][*][operator]: operator to apply with the next match
+
+        :task[matches][*][operator] values (default 'AND'):
+            * **AND**
+            * **OR**
+
+    :arg bool task[escalate-status]: Escalate the task status to the job
+        (default 'false')
+    :arg bool task[run-if-job-successful]: Run only if the job was successful
+        (default 'false')
+    :arg str task[script]: Shell script to run (default '')
+
+    Example:
+
+    .. literalinclude:: /../../tests/publishers/fixtures/post-tasks001.yaml
+       :language: yaml
+    """
+
+    packer_xml = XML.SubElement(xml_parent,
+                            'biz.neustar.jenkins.plugins.packer.PackerPublisher plugin="packer@1.4"')
+    mapping = [
+        ('name', 'name', ''),
+        ('json-template-file', 'jsonTemplate', ''),
+        ('json-template-text', 'jsonTemplateText', ''),
+        ('additonal-params', 'params', ''),
+        ('use-debug', 'useDebug', False),
+        ('change-dir', 'changeDir', ''),
+        ('template-mode', 'templateMode', 'file')]
+    helpers.convert_mapping_to_xml(packer_xml,
+        data, mapping, fail_required=True)
+
 
 def post_tasks(registry, xml_parent, data):
     """yaml: post-tasks
