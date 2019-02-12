@@ -3561,6 +3561,21 @@ def packer(registry, xml_parent, data):
     helpers.convert_mapping_to_xml(packer_xml,
         data, mapping, fail_required=True)
 
+def packer(registry, xml_parent, data):
+    packer_xml = XML.SubElement(xml_parent,
+                            'biz.neustar.jenkins.plugins.packer.PackerPublisher')
+    mapping = [
+        ('name', 'name', ''),
+        ('json-template', 'jsonTemplate', ''),
+        ('json-template-text', 'jsonTemplateText', '')
+        ('json-template-text', 'jsonTemplateText', '')
+        ('params', 'params', '')
+        ('use-debug', 'useDebug', True)
+        ('change-dir', 'changeDir', '')
+        ('template-mode', 'templateMode', 'file')
+        ]
+    helpers.convert_mapping_to_xml(packer_xml,
+        data, mapping, fail_required=True)
 
 def post_tasks(registry, xml_parent, data):
     """yaml: post-tasks
