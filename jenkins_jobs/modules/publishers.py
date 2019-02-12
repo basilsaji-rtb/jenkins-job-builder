@@ -3547,31 +3547,15 @@ def packer(registry, xml_parent, data):
     .. literalinclude:: /../../tests/publishers/fixtures/post-tasks001.yaml
        :language: yaml
     """
-
-    packer_xml = XML.SubElement(xml_parent,
-                            'biz.neustar.jenkins.plugins.packer.PackerPublisher plugin="packer@1.4"')
-    mapping = [
-        ('name', 'name', ''),
-        ('json-template-file', 'jsonTemplate', ''),
-        ('json-template-text', 'jsonTemplateText', ''),
-        ('additonal-params', 'params', ''),
-        ('use-debug', 'useDebug', False),
-        ('change-dir', 'changeDir', ''),
-        ('template-mode', 'templateMode', 'file')]
-    helpers.convert_mapping_to_xml(packer_xml,
-        data, mapping, fail_required=True)
-
-def packer(registry, xml_parent, data):
     packer_xml = XML.SubElement(xml_parent,
                             'biz.neustar.jenkins.plugins.packer.PackerPublisher')
     mapping = [
         ('name', 'name', ''),
         ('json-template', 'jsonTemplate', ''),
-        ('json-template-text', 'jsonTemplateText', '')
-        ('json-template-text', 'jsonTemplateText', '')
-        ('params', 'params', '')
-        ('use-debug', 'useDebug', True)
-        ('change-dir', 'changeDir', '')
+        ('json-template-text', 'jsonTemplateText', ''),
+        ('params', 'params', ''),
+        ('use-debug', 'useDebug', True),
+        ('change-dir', 'changeDir', ''),
         ('template-mode', 'templateMode', 'file')
         ]
     helpers.convert_mapping_to_xml(packer_xml,
